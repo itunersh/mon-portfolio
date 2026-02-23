@@ -25,4 +25,41 @@ document.addEventListener('DOMContentLoaded', () => {
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
     `;
     document.head.appendChild(style);
+
+    // 3. LOGIQUE DE LA POP-UP CONTACT
+    const contactBtn = document.querySelector('.btn-nav');
+    
+    // Création de l'élément HTML de la pop-up
+    const popupHTML = `
+        <div class="popup-overlay" id="contactPopup">
+            <div class="popup-content">
+                <h2>Me contacter</h2>
+                <p>Remi.Scordilis@etu.univ-grenoble-alpes.fr</p>
+                <button class="close-popup">Fermer</button>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+    const popup = document.getElementById('contactPopup');
+    const closeBtn = document.querySelector('.close-popup');
+
+    // Ouvrir la pop-up au clic
+    contactBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Empêche le comportement par défaut du lien
+        popup.style.display = 'flex';
+    });
+
+    // Fermer la pop-up
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    // Fermer en cliquant à côté de la boîte
+    window.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
 });
